@@ -1,0 +1,12 @@
+一、获取Echarts
+     Echarts 由百度前端技术部开发的基于JavaScript数据图标库，可以提供直观、可交互、生动、个性定制化的，数据可视化图表，开源免费开源使用。
+官网:http://echarts.baidu.com/
+
+目前最新的是4.x版本
+
+获取Echarts的几种方式
+1.官网下载界面选择需要的版本http://echarts.baidu.com/download.html
+  开发的时候使用源代码，发布的时候使用完整的，还可以按需下载，
+2.Echarts  GitHub:https//github.com/ecomfe/echarts
+3.通过npm获取:echarts:npm install  echarts  -save
+4.cnd引入: http://www.bootcdn.cn/echarts/
