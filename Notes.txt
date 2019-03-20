@@ -10,3 +10,11 @@
 2.Echarts  GitHub:https//github.com/ecomfe/echarts
 3.通过npm获取:echarts:npm install  echarts  -save
 4.cnd引入: http://www.bootcdn.cn/echarts/
+
+二、引入Echarts
+<body>
+    <!--step 2:HTML DOM中要准备一个DIV,将来用于渲染Echarts图表的-->
+    <div id="main" style="width: 900px;height:600px;"></div>
+    <!--step 1:引入Echarts.js-->
+    <script src="js/echarts.js"></script>
+</body>
