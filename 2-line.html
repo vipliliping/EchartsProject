@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>折线图</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+	</head>
+<body>
+   <!--step 2:HTML DOM中要准备一个DIV,将来用于渲染Echarts图表的-->
+   <div id="main" style="width: 900px;height:600px;"></div>
+   <!--step 1:引入Echarts.js-->
+   <script src="js/echarts.js"></script>
+   <script>
+        // 图表实例化------------------
+        // srcipt标签式引入
+        var myChart = echarts.init(document.getElementById('main'));
+
+
+        // 图表使用-------------------
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: "未来一周气温变化",
+                //副标题
+                subtext: "纯属虚构"
+            },
+            // 提示框，鼠标悬浮交互时的信息提示
+            tooltip : {
+                show:true,
+                // 触发类型，默认数据触发，见下图，可选为：'item' | 'axis' 
+                trigger:"axis",
+                // trigger:"item"
+                // 提示背景颜色，默认为透明度为0.7的黑色 
+                backgroundColor: "rgb(0,0,0)",
+                // 文本样式，默认为白色字体
+                textStyle: {
+                    color: "rgb(255,69,0)",
+                    fontSize: 15,
+                    fontStyle: "oblique",
+                    fontWeight: "bold"
+                }
+            },
+            // toolbox: {
+            //     show : true,
+            //     orient: 'horizontal',      // 布局方式，默认为水平布局，可选为：
+            //                                // 'horizontal' ¦ 'vertical'
+            //     left:'right',//left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，也可以是 'left', 'center', 'right'。
+            //     top:'top',//top 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，也可以是 'top', 'middle', 'bottom'
+            //     //x: 'right',                // 水平安放位置，默认为全图右对齐，可选为：
+            //                                // 'center' ¦ 'left' ¦ 'right'
+            //                                // ¦ {number}（x坐标，单位px）
+            //     //y: 'top',                  // 垂直安放位置，默认为全图顶端，可选为：
+            //                                // 'top' ¦ 'bottom' ¦ 'center'
+            //                                // ¦ {number}（y坐标，单位px）
+            //     color : ['#000000','#22bb22','#4b0082','#d2691e'],
+            //     backgroundColor: 'rgba(0,0,0,0)', // 工具箱背景颜色
+            //     borderColor: '#ccc',       // 工具箱边框颜色
+            //     borderWidth: 0,            // 工具箱边框线宽，单位px，默认为0（无边框）
+            //     padding: 5,                // 工具箱内边距，单位px，默认各方向内边距为5，
+            //     showTitle: true,
+            //     feature : {
+            //         mark : {
+            //             show : true,
+            //             title : {
+            //                 mark : '辅助线-开关',
+            //                 markUndo : '辅助线-删除',
+            //                 markClear : '辅助线-清空'
+            //             },
+            //             lineStyle : {
+            //                 width : 5,
+            //                 color : 'red',
+            //                 type : 'solid'
+            //             }
+            //         },
+                   
+            //         dataView : {
+            //             show : true,
+            //             title : '数据视图',
+            //             readOnly: false,
+            //             lang : ['数据视图', '关闭', '刷新'],
+            //             optionToContent: function(opt) {
+            //                 console.log(opt);
+            //                 var axisData = opt.xAxis[0].data;
+            //                 var series = opt.series;
+            //                 var table = '<table style="width:100%;text-align:center"><tbody><tr>'
+            //                              + '<td>时间</td>'
+            //                              + '<td>' + series[0].name + '</td>'
+            //                              + '<td>' + series[1].name + '</td>'
+            //                              + '</tr>';
+            //                 for (var i = 0, l = axisData.length; i < l; i++) {
+            //                     table += '<tr>'
+            //                              + '<td>' + axisData[i] + '</td>'
+            //                              + '<td>' + series[0].data[i] + '</td>'
+            //                              + '<td>' + series[1].data[i] + '</td>'
+            //                              + '</tr>';
+            //                 }
+            //                 table += '</tbody></table>';
+            //                 return table;
+            //             }
+            //         },
+            //         magicType: {
+            //             show : true,
+            //             title : {
+            //                 line : '动态类型切换-折线图',
+            //                 bar : '动态类型切换-柱形图',
+            //                 stack : '动态类型切换-堆积',
+            //                 tiled : '动态类型切换-平铺'
+            //             },
+            //             type : ['line', 'bar', 'stack', 'tiled']
+            //         },
+            //         restore : {
+            //             show : true,
+            //             title : '还原',
+            //             color : 'black'
+            //         },
+            //         saveAsImage : {
+            //             show : true,
+            //             title : '保存为图片',
+            //             type : 'jpeg',
+            //             lang : ['点击本地保存'] 
+            //         }
+            //     }
+            // },
+            // 图例，每个图表最多仅有一个图例
+            legend: {
+                left:"center",
+                // 选择模式，默认开启图例开关，可选single，multiple 
+                selectedMode : true,
+                // 图例内容数组，数组项通常为{string}，每一项代表一个系列的name，默认布局到达边缘会自动分行
+                data: ["折前收入", "折后收入"],
+            },
+            //数据区域缩放控件
+            dataZoom : {  
+                show : true,  //是否显示数据区域缩放
+                realtime : true, //缩放变化是否实时显示
+                start : 0,  //数据缩放，选择开始比例，默认为0（%）
+                end : 100  //数据缩放，选择结束比例，默认为100（%）
+            },
+            //是否启用拖拽重计算特性，默认关闭
+            calculable : true,
+
+            // 直角坐标系中横轴数组，数组中每一项代表一条横轴坐标轴，仅有一条时可省略数组。
+            xAxis : [
+                {
+                    //坐标轴类型，横轴默认为类目型'category'，纵轴默认为数值型'value' 
+                    type : 'category',
+                    //类目起始和结束两端空白策略，见下图，默认为true留空，false则顶头
+                    boundaryGap : true, 
+                    // 类目列表
+                    data :function (){
+                        var list = [];
+                        for (var i = 1; i <= 30; i++) {
+                            list.push('2013-03-' + i);
+                        }
+                        return list;
+                    }
+                    () ,   // ["2013-3-1","2013-3-2",.....,"2013-3-30"]
+                    // 分隔线，默认显示
+                    splitLine: {
+                         show: true
+                     },
+                     axisTick: {//x轴小标记不显示
+                          show: false
+                    },
+                    splitArea: {//x轴分段的横线
+                         show: false
+                    },
+                    // //坐标轴文本标签
+                    // axisLabel : {
+                    //     formatter: '{value}'
+                    // },
+                }
+            ],
+            yAxis : [
+                // 坐标轴类型，横轴默认为类目型'category'，纵轴默认为数值型'value' 
+                {
+                    type : 'value',
+                    axisLabel: 
+                      {//y轴文字
+                       interval: 0,
+                        formatter: '{value}',
+                        showMaxLabel: false
+                    }
+            }],
+            series : [
+                {
+                    name:'折前收入',
+                    type:'line',
+                    //这句就是去掉点的
+                    symbol: 'circle',  
+                    //图形样式
+                    itemStyle: {
+                        normal: {
+                            //线条样式，可选为：'solid' | 'dotted' | 'dashed'， 树图还可以选：'curve' | 'broken'
+                            type : 'dashed',
+                            lineStyle: {
+                                 width: 5
+                            },
+                            //标签，饼图默认显示在外部，离饼图距离由labelLine.length决定，
+                            // 漏斗图默认显示在右侧，离图形距离由labelLine.length决定
+                            // 地图标签不可指定位置，
+                            // 折线图，柱形图，K线图，散点图可指定position见下
+                            label: {
+                                // 标签显示策略，可选为：true（显示） | false（隐藏）
+                                show: true,
+                                textStyle:{
+                                    color: 'black',
+                                    fontSize: '16',
+                                }
+                              
+                            }
+                        }
+                    },
+                    data:function (){
+                        var list = [];
+                        for (var i = 1; i <= 30; i++) {
+                            list.push(Math.round(Math.random()* 30));
+                        }
+                        // console.log(list);
+                        return list;
+                    }(),
+                    //系列中的数据标线内容
+                    markLine: {
+                        symbol: "circle",
+                        symbolSize: 0,
+                        label: {
+                            color: "black",
+                            position: 'middle',
+                            fontSize: '13',
+                        },
+                        lineStyle: {
+                           color: "#FFB85E",
+                           width: 2,
+                           type: "solid"
+                       },
+                       data: [
+                              // {type: 'average', name: '平均值'},
+                            {name: '标注1', symbolSize: 0, yAxis: Number(yqzqsr), label: {show: true}}
+                         ]
+                    }
+                },
+                {
+                    name:'折后收入',
+                    type:'bar',
+                    data:function (){
+                        var list = [];
+                        for (var i = 1; i <= 30; i++) {
+                            list.push(Math.round(Math.random()* 10));
+                        }
+                        // console.log(list);
+                        return list;
+                    }()
+                }
+            ]
+        };
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
