@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>地图</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+	</head>
+<body>
+    <div id="main" style="width: 900px;height:600px;"></div>
+    <script src="js/echarts.js"></script>
+    <script src="js/china.js"></script>
+    <script>
+        // 图表实例化------------------
+        // srcipt标签式引入
+       var myChart = echarts.init(document.getElementById('main'));
+       var option = {
+          title: {
+                text: "手机销量",
+                //副标题
+                subtext: "纯属虚构",
+                //水平安放位置，默认为左侧，可选为：'center' | 'left' | 'right' | {number}（x坐标，单位px） 
+                x: "center"
+         },
+         //提示框，鼠标悬浮交互时的信息提示
+         tooltip: {
+                //触发类型，默认数据触发，见下图，可选为：'item' | 'axis' 
+                trigger: "item"
+         },
+         //图例
+         legend: {
+                orient: "vertical",
+                x: "left",
+                data: ["iphone3", "iphone4", "iphone5"]
+        },
+        //值域选择，每个图表最多仅有一个值域控件
+        dataRange: {
+                min: 0,
+                max: 2500,
+                x: "left",
+                y: "bottom",
+                text: ["高", "低"],
+                // 是否启用值域漫游，启用后无视splitNumber和splitList，值域显示为线性渐变 
+                calculable: true
+         },
+        //  toolbox: {
+        //         show: true,
+        //         orient: "vertical",
+        //         x: "right",
+        //         y: "bottom",
+        //         feature: {
+        //             mark: {
+        //                 show: true
+        //             },
+        //             dataView: {
+        //                 show: true,
+        //                 readOnly: false
+        //             },
+        //             restore: {
+        //                 show: true
+        //             },
+        //             saveAsImage: {
+        //                 show: true
+        //             }
+        //         }
+        // },
+        series: [
+            {
+                name: "iphone3",
+                type: "map",
+                //地图类型，支持world，china及全国34个省市自治区。省市自治区的mapType直接使用简体中文,如：上海，北京
+                mapType: "china", 
+                //是否开启滚轮缩放和拖拽漫游，默认为false（关闭），其他有效输入为true（开启），'scale'（仅开启滚轮缩放），'move'（仅开启拖拽漫游）
+                roam: false, 
+                //地图数值计算方式，默认为加和，可选为：'sum'（总数） | 'average'（均值）
+                mapValueCalculation: "sum", 
+                // 图形样式，可设置图表内图形的默认样式和强调样式（悬浮时样式）
+                itemStyle: {
+                    normal: {
+                        // 标签  地图标签不可指定位置
+                        label: {
+                            show: true
+                        }
+                    },
+                    emphasis: {
+                        label: {
+                            show: true
+                        }
+                    }
+                },
+                data: [
+                        {
+                            name: "北京",
+                            value: 234
+                        },
+                        {
+                            name: "天津",
+                            value: 532
+                        },
+                        {
+                            name: "上海",
+                            value: 134
+                        },
+                        {
+                            name: "重庆",
+                            value: 983
+                        },
+                        {
+                            name: "河北",
+                            value: 783
+                        },
+                        {
+                            name: "河南",
+                            value: 345
+                        },
+                        {
+                            name: "云南",
+                            value: 872
+                        },
+                        {
+                            name: "辽宁",
+                            value: 94
+                        },
+                        {
+                            name: "黑龙江",
+                            value: 342
+                        },
+                        {
+                            name: "湖南",
+                            value: 989
+                        },
+                        {
+                            name: "安徽",
+                            value: 767
+                        },
+                        {
+                            name: "山东",
+                            value: 675
+                        },
+                        {
+                            name: "新疆",
+                            value: 874
+                        },
+                        {
+                            name: "江苏",
+                            value: 874
+                        },
+                        {
+                            name: "浙江",
+                            value: 878
+                        },
+                        {
+                            name: "江西",
+                            value: 928
+                        },
+                        {
+                            name: "湖北",
+                            value: 44
+                        },
+                        {
+                            name: "广西",
+                            value: 448
+                        },
+                        {
+                            name: "甘肃",
+                            value: 887
+                        },
+                        {
+                            name: "山西",
+                            value: 903
+                        },
+                        {
+                            name: "内蒙古",
+                            value: 673
+                        },
+                        {
+                            name: "陕西",
+                            value: 563
+                        },
+                        {
+                            name: "吉林",
+                            value: 747
+                        },
+                        {
+                            name: "福建",
+                            value: 112
+                        },
+                        {
+                            name: "贵州",
+                            value: 473
+                        },
+                        {
+                            name: "广东",
+                            value: 647
+                        },
+                        {
+                            name: "青海",
+                            value: 838
+                        },
+                        {
+                            name: "西藏",
+                            value: 626
+                        },
+                        {
+                            name: "四川",
+                            value: 515
+                        },
+                        {
+                            name: "宁夏",
+                            value: 172
+                        },
+                        {
+                            name: "海南",
+                            value: 77
+                        },
+                        {
+                            name: "台湾",
+                            value: 837
+                        },
+                        {
+                            name: "香港",
+                            value: 677
+                        },
+                        {
+                            name: "澳门",
+                            value: 43
+                        }
+                    ]
+            },{
+                name: "iphone4",
+                type: "map",
+                mapType: "china",
+                roam: false,
+                mapValueCalculation: "sum",
+                itemStyle: {
+                normal: {
+                    label: {
+                        show: true
+                    }
+                },
+                emphasis: {
+                    show: true,
+                    label: {
+                         show: true
+                        }
+                    }
+                },
+                data: [
+                        {
+                            name: "北京",
+                            value: 623
+                        },
+                        {
+                            name: "天津",
+                            value: 322
+                        },
+                        {
+                            name: "上海",
+                            value: 57
+                        },
+                        {
+                            name: "重庆",
+                            value: 566
+                        },
+                        {
+                            name: "河北",
+                            value: 737
+                        },
+                        {
+                            name: "安徽",
+                            value: 846
+                        },
+                        {
+                            name: "新疆",
+                            value: 748
+                        },
+                        {
+                            name: "浙江",
+                            value: 949
+                        },
+                        {
+                            name: "江西",
+                            value: 747
+                        },
+                        {
+                            name: "山西",
+                            value: 848
+                        },
+                        {
+                            name: "内蒙古",
+                            value: 737
+                        },
+                        {
+                            name: "甘肃",
+                            value: 887
+                        },
+                        {
+                            name: "吉林",
+                            value: 848
+                        },
+                        {
+                            name: "福建",
+                            value: 727
+                        },
+                        {
+                            name: "广东",
+                            value: 626
+                        },
+                        {
+                            name: "西藏",
+                            value: 747
+                        },
+                        {
+                            name: "四川",
+                            value: 844
+                        },
+                        {
+                            name: "宁夏",
+                            value: 737
+                        },
+                        {
+                            name: "香港",
+                            value: 325
+                        },
+                        {
+                            name: "澳门",
+                            value: 509
+                        }
+                    ]
+            },{
+                name: "iphone5",
+                type: "map",
+                mapType: "china",
+                roam: false,
+                mapValueCalculation: "sum",
+                itemStyle: {
+                        normal: {
+                            label: {
+                                show: true
+                            }
+                        },
+                        emphasis: {
+                            label: {
+                                show: true
+                            }
+                        }
+                    },
+                    data: [
+                        {
+                            name: "北京",
+                            value: 673
+                        },
+                        {
+                            name: "天津",
+                            value: 636
+                        },
+                        {
+                            name: "上海",
+                            value: 633
+                        },
+                        {
+                            name: "广东",
+                            value: 99
+                        },
+                        {
+                            name: "台湾",
+                            value: 998
+                        },
+                        {
+                            name: "香港",
+                            value: 222
+                        },
+                        {
+                            name: "澳门",
+                            value: 666
+                        }
+                    ]
+            }
+        ]
+       };
+       //将实例化的Echarts图表设置图表配置项，同时在DOM中渲染图表显示
+       myChart.setOption(option);
+    </script>
+</body>
+</html>
