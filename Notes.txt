@@ -22,7 +22,11 @@
 
 3、准备Data(数据)
 4、设置Option
-
+   tooltip:提示框
+     formatter
+     内容格式器：{string}（Template） | {Function}，支持异步回调见表格下方
+     具体见手册
+     
 二、地图
 1.地图下载
 
