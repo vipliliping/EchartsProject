@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>echarts高级-自定义主题</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<!--
+高级-3  自定义主题
+第一步:下载主题
+第二步:引用主题js文件
+第三步:初始化主题
+-->
+<body>
+    <div id="main" style="width: 900px;height:600px;"></div>
+    <a href="javascript:void(0)" onclick="changeTheme('dark')">dark</a> | <a href="javascript:void(0)" onclick="changeTheme('macarons')">macarons</a>
+    <script src="js/echarts.js"></script>
+    <script src="theme/dark.js"></script>
+    <script src="theme/macarons.js"></script>
+    <script>
+         // 图表实例化------------------
+        // srcipt标签式引入
+        var myChart = echarts.init(document.getElementById('main'));
+        //var myChart = echarts.init(document.getElementById('main'),'dark');
+        // 图表使用-------------------
+        // 指定图表的配置项和数据
+        var option = {
+            // 标题
+            title: {
+                text: 'ECharts 入门示例'
+            },
+            //提示
+            tooltip : {
+                trigger: 'axis'
+            },
+             // 图例
+             legend: {
+                data: ['销量']
+            },
+            // x轴
+            xAxis: {
+                data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+            },
+            yAxis: {},
+            // 数据
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        };
+
+        myChart.setOption(option);
+        
+        function changeTheme(theme){
+            // 清空当前实例，会移除实例中所有的组件和图表。清空后调用 getOption 方法返回一个{}空对象。
+            myChart.clear();
+            myChart = echarts.init(document.getElementById('main'),theme);
+            myChart.setOption(option);
+        }
+    </script>
+</body>
+</html>

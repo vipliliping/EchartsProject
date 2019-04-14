@@ -30,3 +30,74 @@
 二、地图
 1.地图下载
 
+
+
+三、API
+3.1echarts
+ 全局 echarts 对象，在 script 标签引入 echarts.js 文件后获得，或者在 AMD 环境中通过 require('echarts') 获得。
+ 1. init Function 
+ 创建一个 ECharts 实例，返回 echartsInstance，不能在单个容器上初始化多个 ECharts 实例
+ var myChart = echarts.init(document.getElementById('main'));
+ 2.connect Function
+ 多个图表实例实现联动。
+  myChart1 = echarts.init(document.getElementById('main1'));
+  myChart2 = echarts.init(document.getElementById('main2'));
+ //将myChart1与myChart2关联起来,多个图表实例实现联动。
+ echarts.connect([myChart1, myChart2]); 
+ 3.registerMap Function
+ 注册可用的地图，必须在包括 geo 组件或者 map 图表类型的时候才能使用。
+
+3.2echartsInstance
+ 通过 echarts.init 创建的实例。
+ 1.setOption Function
+ 设置图表实例的配置项以及数据，万能接口，所有参数和数据的修改都可以通过setOption 完成，
+ ECharts 会合并新的参数和数据，然后刷新图表。
+ 如果开启动画的话，ECharts找到两组数据之间的差异然后通过合适的动画去表现数据的变化。
+ myChart = echarts.init(document.getElementById('main'));
+ var option = {
+
+  };
+myChart.setOption(option);
+2.resize Function
+改变图表尺寸，在容器大小发生改变时需要手动调用。
+ myChart1 = echarts.init(document.getElementById('main1'));
+ myChart1.resize();
+3.clear
+ 清空当前实例，会移除实例中所有的组件和图表。清空后调用 getOption 方法返回一个{}空对象。
+  myChart.clear();
+
+  function changeTheme(theme){
+      // 清空当前实例，会移除实例中所有的组件和图表。清空后调用 getOption 方法返回一个{}空对象。
+      myChart.clear();
+      myChart = echarts.init(document.getElementById('main'),theme);
+      myChart.setOption(option);
+  }
+4.on Function
+(
+    eventName: string,
+    handler: Function,
+    context?: Object
+)
+绑定事件处理函数。
+ECharts 中的事件有两种，一种是鼠标事件，在鼠标点击某个图形上会触发，
+还有一种是调用dispatchAction后触发的事件。每个 action 都会有对应的事件，具体见 action 和 events 的文档。
+
+chart.setOption({
+      // ...
+      series: [{
+          name: 'uuu'
+          // ...
+      }]
+  });
+
+chart.on('mouseover', {seriesName: 'uuu'}, function () {
+      // series name 为 'uuu' 的系列中的图形元素被 'mouseover' 时，此方法被回调。
+});
+5.off Function
+解绑事件处理函数。
+
+3.3action
+ECharts中支持的图表行为，通过 dispatchAction 触发。
+3.4events
+在ECharts中主要通过on方法添加事件处理函数，该文档描述了所有 ECharts 的事件列表。
+ECharts 中的事件分为两种，一种是鼠标事件，在鼠标点击某个图形上会触发，还有一种是调用dispatchAction后触发的事件。
